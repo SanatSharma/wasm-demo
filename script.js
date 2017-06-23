@@ -2,7 +2,26 @@ var board,
     game = new Chess();
 
 /*The "AI" part starts here */
+/* 
+wasm-demo criteria: convert computation heavy features of current chess engine and utilize wasm to show performance boost
+Functions needed to be converted: minimax(),  ? minimaxRoot(), evaluateBoard().
+Since the AssemblySccript compiler compiles function calls, it is possible to create seperate scripts for the wasm code as well
+however, it might be counterintuitive to do so.
 
+Major things to figure out: 1)  ugly_moves() returns the result of generate_moves(criteria), which returns an array 
+after calling other functions and adding to the moves array (which it returns). A way to possibly avoid this would be to 
+call this function outside the minimax function. The problem arises that since the minimax function is recursive, we need to
+call the ugly_moves() func multiple times....need to find a way to do this
+
+2) game.undo() undoes the move reccently made, which makes sense since finding the right move means iterating through a list
+of possible moves (in this case over a tree) and then checking which is the best. The problem arises that this function calls
+a host of other functions such as unod_move() and make_pretty(), which call other functions, making the undo function almost 
+impossible to convert to wasm currently. Currently have no good solution of how to avoid this
+
+3) other aspects of the program can be figured out without too much problem but integrating wasm with js will take time.
+*/
+
+/* create the base to be passed to the helper minimax function */
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
 
     var newGameMoves = game.ugly_moves();
@@ -12,6 +31,7 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     for(var i = 0; i < newGameMoves.length; i++) {
         var newGameMove = newGameMoves[i]
         game.ugly_move(newGameMove);
+        // Does the AssemblyScript compiler support booleans? if not the next line will still work, but add support to booleans if not implemented
         var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
         game.undo();
         if(value >= bestMove) {
@@ -22,6 +42,8 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     return bestMoveFound;
 };
 
+
+/* recursively scan the alphabeta tree */
 var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
     positionCount++;
     if (depth === 0) {
@@ -33,6 +55,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
     if (isMaximisingPlayer) {
         var bestMove = -9999;
         for (var i = 0; i < newGameMoves.length; i++) {
+            //if this variable is not being stored, is it doing anything significant?
             game.ugly_move(newGameMoves[i]);
             bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
