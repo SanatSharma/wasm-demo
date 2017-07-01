@@ -120,8 +120,9 @@ function checkCol (col: number, value: number): number{
 
 // checks if the element is present in the box
 function checkBox (row: number, col: number, value: number): number{
-    row = (row / 3) * 3;
-    col = (col / 3) * 3;
+    // Need to floor to get integer value
+    row = Math.floor((row / 3)) * 3;
+    col = Math.floor((col / 3)) * 3;
 
     for (let i: number = 0; i < 3; i++){
         for (let j: number = 0; j < 3; j++){
