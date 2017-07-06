@@ -18,7 +18,7 @@
           .filter(_ => _.length > 0)
           .map(_ => `0x${_}`)) + "]");
 
-
+//There is a function in the wasm called add12(a: number) that calls the function notify with parameter a: number and adds 1 to whatever the result of notify is. Eg: add12(6) = 13
 var importObject = {
     env: {
 	notify: function(message) {
