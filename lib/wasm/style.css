@@ -53,3 +53,10 @@ tr:first-child {
 tr:nth-child(3n) td {
   border-bottom:solid ;
 }
+
+button {
+    margin:1em auto;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}

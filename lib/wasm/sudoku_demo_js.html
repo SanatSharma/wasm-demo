@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
 ​
-<p>Power function</p>
-​<input type=text id="a"/>
-<input type=text id="b"/>​
-<input type=button onclick="myFunction(document.getElementById('a').value,document.getElementById('b').value)" />​
+
+<button type=button>Solve Sudoku</button>
+<!--onclick="myFunction(document.getElementById('a').value,document.getElementById('b').value)" -->​
 
 <p id="demo"></p>
 <style>
@@ -88,7 +90,6 @@ main();
 function solve(row, col, sum) {
     if (row > 8) {
         // finished computing the board
-        console.log(model);
         return 1;
     }
     if (model[row][col] != 0) {
