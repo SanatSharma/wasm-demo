@@ -8,13 +8,34 @@
 <input type=button onclick="myFunction(document.getElementById('a').value,document.getElementById('b').value)" />​
 
 <p id="demo"></p>
-
+<style>
+table { border-collapse: collapse; font-family: Calibri, sans-serif; }
+colgroup, tbody { border: solid medium; }
+td { border: solid thin; height: 2.4em; width: 2.4em; text-align: center; padding: 0; }
+ </style>
+<table>
+  <caption>Sudoku of the day</caption>
+  <colgroup><col><col><col>
+  <colgroup><col><col><col>
+  <colgroup><col><col><col>
+  <tbody>
+   <tr> <td>1 <td>  <td>3 <td>6 <td>  <td>4 <td>7 <td>  <td>9
+   <tr> <td>  <td>2 <td>  <td>  <td>9 <td>  <td>  <td>1 <td>
+   <tr> <td>7 <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>6
+  <tbody>
+   <tr> <td>2 <td>  <td>4 <td>  <td>3 <td>  <td>9 <td>  <td>8
+   <tr> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
+   <tr> <td>5 <td>  <td>  <td>9 <td>  <td>7 <td>  <td>  <td>1
+  <tbody>
+   <tr> <td>6 <td>  <td>  <td>  <td>5 <td>  <td>  <td>  <td>2
+   <tr> <td>  <td>  <td>  <td>  <td>7 <td>  <td>  <td>  <td>
+   <tr> <td>9 <td>  <td>  <td>8 <td>  <td>2 <td>  <td>  <td>5
+</table>
 
 <script>
     
 console.time("Execution time");
 "use strict";
-exports.__esModule = true;
 var model = new Array(9);
 var modelLength = 9;
 function initBoard() {
@@ -52,22 +73,22 @@ function initBoard() {
     model[8][2] = 2;
     model[8][4] = 4;
 }
-exports.initBoard = initBoard;
 function getElement(row, col) {
     return model[row][col];
 }
-exports.getElement = getElement;
 function main() {
     initBoard();
+    
     solve(0, 0, 0);
     console.log("Solved");
     console.timeEnd("Execution time");
+    console.log(model);
 }
-exports.main = main;
 main();
 function solve(row, col, sum) {
     if (row > 8) {
         // finished computing the board
+        console.log(model);
         return 1;
     }
     if (model[row][col] != 0) {
