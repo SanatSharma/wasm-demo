@@ -1,0 +1,7 @@
+Sudoku 16*16
+
+Wasm 
+Run 1: 339.85 sec
+
+Javascript
+Run 1: 108.29 sec
