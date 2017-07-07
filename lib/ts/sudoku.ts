@@ -19,7 +19,7 @@ function initBoard() {
     // Create the initial board
 	model[0][0] = 9 ;
 	model[0][3] = 2 ;
-	//model[0][6] = 7 ;
+model[0][6] = 7 ;
 	model[0][7] = 5 ;
 
     
