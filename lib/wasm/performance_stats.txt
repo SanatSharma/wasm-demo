@@ -2,6 +2,10 @@ Sudoku 16*16
 
 Wasm 
 Run 1: 339.85 sec
+Run 2: 349.32 sec
+Run 3: 332.59 sec
 
 Javascript
 Run 1: 108.29 sec
+Run 2: 122.39 sec
+Run 3: 108.67 sec
