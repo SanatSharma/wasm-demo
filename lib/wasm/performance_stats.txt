@@ -17,4 +17,10 @@ run the error throwing code
 
 Javascript: 1-10ms on average
 
+Sudoku 9*9
+Number of solutions found with current board: 255 solutions
+time taken to find first solution with GUI: 13sec
+time taken to find all solutions: 240sec
+
+Hence, we need to throw an error as soon as we reach the edge case otherwise it'll cost us big time.
 

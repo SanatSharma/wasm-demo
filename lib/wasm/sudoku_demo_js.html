@@ -6,27 +6,25 @@
 <body>
 ​
 <p id="demo"></p>
-<table>
+<table id = "board">
   <colgroup><col><col><col>
   <colgroup><col><col><col>
   <colgroup><col><col><col>
   <tbody>
-   <tr> <td>1 <td>  <td>3 <td>6 <td>  <td>4 <td>7 <td>  <td>9
-   <tr> <td>  <td>2 <td>  <td>  <td>9 <td>  <td>  <td>1 <td>
-   <tr> <td>7 <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>6
+   <tr>  <td>9 <td>  <td>  <td>2 <td>  <td>  <td>  <td>5 <td>
+   <tr>  <td>6 <td>  <td>  <td>  <td>5 <td>  <td>  <td>4 <td>
+   <tr>  <td>  <td>2 <td>  <td>4 <td>  <td>  <td>3 <td>  <td>
   <tbody>
-   <tr> <td>2 <td>  <td>4 <td>  <td>3 <td>  <td>9 <td>  <td>8
-   <tr> <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>  <td>
-   <tr> <td>5 <td>  <td>  <td>9 <td>  <td>7 <td>  <td>  <td>1
+   <tr>  <td>  <td>  <td>8 <td>  <td>  <td>  <td>  <td>  <td>
+   <tr>  <td>  <td>  <td>  <td>5 <td>  <td>9 <td>  <td>6 <td>
+   <tr>  <td>  <td>  <td>  <td>  <td>  <td>  <td>4 <td>  <td>1
   <tbody>
-   <tr> <td>6 <td>  <td>  <td>  <td>5 <td>  <td>  <td>  <td>2
-   <tr> <td>  <td>  <td>  <td>  <td>7 <td>  <td>  <td>  <td>
-   <tr> <td>9 <td>  <td>  <td>8 <td>  <td>2 <td>  <td>  <td>5
+   <tr>  <td>  <td>1  <td>  <td>  <td>  <td>5 <td>  <td>8 <td>
+   <tr>  <td>  <td>9  <td>  <td>  <td>7 <td>  <td>  <td>  <td>4
+   <tr>  <td>  <td>8  <td>2 <td>  <td>4 <td>  <td>  <td>  <td>
 </table>
 
-<button type=button style="margin-top:50px; margin-left:44%; font-size:30px">Solve Sudoku</button>
-<!--onclick="myFunction(document.getElementById('a').value,document.getElementById('b').value)" -->​
-
+<button type=button style="margin-top:50px; margin-left:44%; font-size:30px" onclick="main()">Solve Sudoku</button>
 
 <script>
     
@@ -34,6 +32,7 @@ console.time("Execution time");
 "use strict";
 var model = new Array(9);
 var modelLength = 9;
+var counter=0;
 function initBoard() {
     var i = 0;
     var j = 0;
@@ -79,12 +78,20 @@ function main() {
     console.log("Solved");
     console.timeEnd("Execution time");
     console.log(model);
+
+    var t0 =performance.now();
+    updateGUI();
+    var t1=performance.now();
+    console.log(t1-t0);
 }
-main();
 function solve(row, col, sum) {
     if (row > 8) {
         // finished computing the board
-        return 1;
+     //  console.timeEnd("Execution time");
+  
+//        throw new Error();
+         return 1;
+        
     }
     if (model[row][col] != 0) {
         //nextElem (row, col, sum);
@@ -100,7 +107,12 @@ function solve(row, col, sum) {
     else {
         for (var i = 1; i <= 9; i++) {
             if (checkRow(row, i) && checkCol(col, i) && checkBox(row, col, i)) {
+                counter++;
                 model[row][col] = i;
+                if(counter/100 > 0){
+                    counter=0;
+                    updateGUI();
+                }
                 //    nextElem (row, col, sum);
                 if (col < 8) {
                     // can go to next element in column
@@ -155,6 +167,14 @@ function checkBox(row, col, value) {
         }
     }
     return 1;
+}
+
+function updateGUI(){
+    for(var i=0; i <modelLength; i++){
+        for(var j=0; j<modelLength;j++){
+            document.getElementById("board").rows[0].cells[j].innerHTML = model[i][j];
+        }
+    }
 }
 
 </script>
