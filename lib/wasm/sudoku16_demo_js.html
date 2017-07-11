@@ -1,21 +1,85 @@
 <!DOCTYPE html>
 <html>
+	<head>
+    <link rel="stylesheet" href="style.css">
+<style>
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
 <body>
-​
-<p>Power function</p>
-​<input type=text id="a"/>
-<input type=text id="b"/>​
-<input type=button onclick="main()" />​
 
 <p id="demo"></p>
+<button type=button style="margin-top:50px; margin-left:44%; font-size:30px" onclick="main()">Solve Sudoku</button>
 
 
 <script>
-    
+
+var table = new Array(16);
+
+function startGame() {
+    var i = 0;
+    var j = 0;
+    for (i = 0; i < 16; i++) {
+        table[i] = new Array(16);
+        for (j = 0; j < 16; j++) {
+            table[i][j] = new component("50px", "50px", "black", i*50, j*50);
+        }
+    }
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 800;
+        this.canvas.height = 800;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        //this.interval = setInterval(updateGameArea, 200);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y) {
+    this.text = 0;
+    this.width = width;
+    this.height = height;  
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        
+    }
+}
+var count = 0;
+function updateGameArea() {
+    count++;
+    //myGameArea.clear();
+    var i = 0;
+    var j = 0;
+    for (i = 0; i < 16; i++) {
+        for (j = 0; j < 16; j++) {
+                
+                table[i][j].text = model[i][j];
+                table[i][j].update();
+        }
+    }
+}
+
 console.time("execution");
 var model = new Array(16);
 var modelLength = 16;
 function initBoard() {
+	startGame();
     var i = 0;
     var j = 0;
     for (i = 0; i < modelLength; i++) {
@@ -124,7 +188,7 @@ function initBoard() {
 		model[13][1] = 10;
 		model[13][2] = 13;
 		model[13][4] = 12;
-a		//model[13][9] = 4;
+				//model[13][9] = 4;
 		model[13][10] = 1;
 		model[13][15] = 2;
 		
@@ -143,7 +207,10 @@ a		//model[13][9] = 4;
 
 function main() {
     initBoard();
-
+ var refreshIntervalId = setInterval(function() { 	
+                
+                updateGameArea();
+            }, 100);
     solve(0,0);
    
 }
