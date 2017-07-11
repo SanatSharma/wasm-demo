@@ -5,7 +5,7 @@
 <p>Power function</p>
 ​<input type=text id="a"/>
 <input type=text id="b"/>​
-<input type=button onclick="myFunction(document.getElementById('a').value,document.getElementById('b').value)" />​
+<input type=button onclick="main()" />​
 
 <p id="demo"></p>
 
@@ -15,7 +15,6 @@
 console.time("execution");
 var model = new Array(16);
 var modelLength = 16;
-main();
 function initBoard() {
     var i = 0;
     var j = 0;
@@ -145,22 +144,14 @@ a		//model[13][9] = 4;
 function main() {
     initBoard();
 
-    console.timeEnd("execution");
-    throw Error("TIME");
-   // for(var i = 0 ;i<20;i++){
-//        console.log(1);
-  //      solve(0,0);
-   // }
-
-  // console.log("Solution");
-    
-//    console.timeEnd("execution");
-
+    solve(0,0);
+   
 }
 function solve(row, col) {
     if (row > 15) {
         // finished computing the board
         console.timeEnd("execution");
+		console.log(model);
 
         throw new Error("Solution");
     }
