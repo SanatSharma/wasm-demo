@@ -1,0 +1,40 @@
+<html>
+<body>
+  <table>
+    <tr><td>JS:</td><td><span id='js-time'>0</span></td></td>
+    <tr><td>WASM:</td><td><span id='wasm-time'>0</span></td></td>
+  </table>
+  <script>
+    'use strict';
+
+    const total = [ 0, 0 ];
+    const solved = [ 0, 0 ];
+
+    const out = [
+        document.getElementById('wasm-time'),
+        document.getElementById('js-time')
+    ];
+
+    function update(index, time) {
+        total[index] += event.data;
+        solved[index]++;
+        out[index].textContent = (((total[index] / solved[index]) * 100) >>> 0) / 100;
+    }
+
+    const wasmWorker = new Worker('wasm-worker.js');
+    wasmWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`WASM: ${t}`);
+        update(0, t);
+    });
+
+    const jsWorker = new Worker('js-worker.js');
+    jsWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`JS: ${t}`);
+        update(1, t);
+    });
+    
+  </script>
+</body>
+</html>

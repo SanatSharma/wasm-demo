@@ -1,0 +1,17 @@
+{
+  "name": "sudoku-demo",
+  "description": "Benchmarks same Sudoku 'solver.ts' (TypeScript vs. AssemblyScript).",
+  "dependencies": {
+    "assemblyscript": "latest",
+    "typescript": "latest",
+    "http-serve": "latest"
+  },
+  "scripts":{
+    "build:private": "node ../../../../dcodeIO/AssemblyScript/bin/asc solver.ts -o solver.wasm",
+    "build:asc": "asc solver.ts -o solver.wasm",
+    "build:tsc": "tsc solver.ts --module es2015",
+    "build": "npm run build:asc && npm run build:tsc",
+    "start": "http-serve"
+  },
+  "private": true
+}
