@@ -1,7 +1,9 @@
-let model: int[][] = new Array(9);
 let modelLength: int = 9;
+let model: Array<int>[] = new Array(9);
+let solutionModel: Array<int>[];
+//let count: int = 0;
 
-export function initBoard() {
+export function initBoard(): void {
     let i: int = 0;
     let j: int = 0;
 
@@ -12,11 +14,12 @@ export function initBoard() {
         }
     }
 
-
+    
     // Create the initial board
-	model[0][0] = 9 ;
-	model[0][3] = 2 ;
-	model[0][7] = 5 ;
+    model[0][0] = 9 ;
+    model[0][3] = 2 ;
+    model[0][6] = 7 ;
+    model[0][7] = 5 ;
 
     
     model[1][0] = 6 ;
@@ -26,9 +29,13 @@ export function initBoard() {
 
     model[2][1] = 2 ;
     model[2][3] = 4 ;
+    //model[2][7] = 1 ;
     model[2][6] = 3;
+
+    //model[3][0] = 2 ;
     model[3][2] = 8 ;
 
+    //model[4][1] = 7 ;
     model[4][3] = 5 ;
     model[4][5] = 9 ;
     model[4][7] = 6 ;
@@ -47,75 +54,62 @@ export function initBoard() {
     model[8][1] = 8 ;
     model[8][2] = 2 ;
     model[8][4] = 4 ;
-    
+    //model[8][8] = 6 ;
 }
 
-export function getElement(row: int, col: int): int{
-    return model[row][col];
+export function getModel(a: int, b: int): int {
+    return solutionModel[a][b];
 }
 
-export function main(): int{
-
+export function main(): int {
     initBoard();
     return solve(0,0,0);
-    //console.log("Solved");
-
+    //count = count + 1;
 }
 
 function solve (row: int, col: int, sum: int): int {
     if (row > 8){
         // finished computing the board
-   
+        // if(count == 0) {
+            for (let i: int = 0; i < 9; i++){
+                solutionModel[i] = new Array(9);
+                for (let j: int = 0; j < 9; j++){
+                    solutionModel[i][j] = model[i][j];
+                }
+            }
+        //     count = count + 1;
+        // }
         return 1;
-        
     }
 
-    if (model[row][col] != 0){
-        //nextElem (row, col, sum);
-        if (col < 8){
-        // can go to next element in column
-            sum = solve (row, col + 1, sum);
-        }
-        else{
-        // reached the end of the row. Move on to the next row
-          sum = solve (row + 1, 0, sum);
-        }
-    }
+    else if (model[row][col] != 0)
+        sum = nextElem (row, col, sum);
     else{
         for (let i: int = 1; i <= 9; i++){
             if(checkRow(row, i) && checkCol(col, i) && checkBox(row, col, i)){
                 model[row][col] = i;
-            //    nextElem (row, col, sum);
-                if (col < 8){
-               // can go to next element in column
-                   sum = solve (row, col + 1, sum);
-                }
-                else{
-             // reached the end of the row. Move on to the next row
-                  sum = solve (row + 1, 0, sum);
-                }
+                sum = nextElem (row, col, sum);
             }
         }
 
         model[row][col] = 0;
 
     }
-
     return sum;
 }
 
-function nextElem (row: int, col: int, sum: int){
+function nextElem (row: int, col: int, sum: int): int {
     if (col < 8){
         // can go to next element in column
-        solve (row, col + 1, sum);
+        return solve (row, col + 1, sum);
     }
     else{
         // reached the end of the row. Move on to the next row
-        solve (row + 1, 0, sum);
+        return solve (row + 1, 0, sum);
     }
 }
 
-// return number instead of boolean to work with AssemblyScript
+// return int instead of boolean to work with AssemblyScript
 
 // checks if the element is present in the row
 function checkRow (row: int, value: int): int{
@@ -149,5 +143,3 @@ function checkBox (row: int, col: int, value: int): int{
     }
     return 1;
 }
-
-
