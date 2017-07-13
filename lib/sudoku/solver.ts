@@ -66,7 +66,7 @@ function solve (row: int, col: int): void {
         // finished computing the board
     }
 
-    if (model[row][col] != 0)
+    else if (model[row][col] != 0)
         nextElem (row, col);
     else{
         for (let i: int = 1; i <= 9; i++){
