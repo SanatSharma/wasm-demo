@@ -117,7 +117,7 @@ function checkCol (col: int, value: int): int{
 function checkBox (row: int, col: int, value: int): int{
     // Need to floor to get integer value
     row = ((row / 3) | 0) * 3;
-    col = ((row / 3) | 0) * 3;
+    col = ((col / 3) | 0) * 3;
 
     for (let i: int = 0; i < 3; i++){
         for (let j: int = 0; j < 3; j++){
