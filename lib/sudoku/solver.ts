@@ -2,6 +2,8 @@ type int = number;
 
 let modelLength: int = 9;
 let model: int[][] = new Array(9);
+let solutionModel: int[][];
+let count: int = 0;
 
 export function initBoard(): void {
     let i: int = 0;
@@ -57,16 +59,25 @@ export function initBoard(): void {
     //model[8][8] = 6 ;
 }
 
+export function getModel(a: int, b: int): int {
+    return solutionModel[a][b];
+}
+
 export function main(): void {
+    count = 0;
     solve(0,0);
 }
 
 function solve (row: int, col: int): void {
     if (row > 8){
         // finished computing the board
+        if(count == 0) {
+            solutionModel = model;
+        }
+        count = count + 1;
     }
 
-    if (model[row][col] != 0)
+    else if (model[row][col] != 0)
         nextElem (row, col);
     else{
         for (let i: int = 1; i <= 9; i++){
@@ -117,7 +128,7 @@ function checkCol (col: int, value: int): int{
 function checkBox (row: int, col: int, value: int): int{
     // Need to floor to get integer value
     row = ((row / 3) | 0) * 3;
-    col = ((row / 3) | 0) * 3;
+    col = ((col / 3) | 0) * 3;
 
     for (let i: int = 0; i < 3; i++){
         for (let j: int = 0; j < 3; j++){
