@@ -57,8 +57,8 @@ export function getElement(row: int, col: int): int{
 export function main(): int{
 
     initBoard();
-    solve(0,0,0);
-    console.log("Solved");
+    return solve(0,0,0);
+    //console.log("Solved");
 
 }
 
@@ -138,8 +138,8 @@ function checkCol (col: int, value: int): int{
 // checks if the element is present in the box
 function checkBox (row: int, col: int, value: int): int{
     // Need to floor to get integer value
-    row = Math.floor(row / 3) * 3;
-    col = Math.floor(col / 3) * 3;
+    row = (row / 3) * 3;
+    col = (col / 3) * 3;
 
     for (let i: int = 0; i < 3; i++){
         for (let j: int = 0; j < 3; j++){

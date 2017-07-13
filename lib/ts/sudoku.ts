@@ -7,7 +7,6 @@ function initBoard() {
     let i: number = 0;
     let j: number = 0;
 
-    console.log(model.length);
     for (i = 0; i < modelLength; i++){
         model[i] = new Array(9);
         for (j = 0; j < modelLength; j++){
@@ -67,11 +66,9 @@ function main() {
 function solve (row: number, col: number) {
     if (row > 8){
         // finished computing the board
-        console.log("Solution Reached");
-        console.log(model);
     }
 
-    if (model[row][col] != 0)
+    else if (model[row][col] != 0)
         nextElem (row, col);
     else{
         for (let i: number = 1; i <= 9; i++){
@@ -121,8 +118,8 @@ function checkCol (col: number, value: number): number{
 // checks if the element is present in the box
 function checkBox (row: number, col: number, value: number): number{
     // Need to floor to get integer value
-    row = Math.floor((row / 3)) * 3;
-    col = Math.floor((col / 3)) * 3;
+    row = (row / 3) * 3;
+    col = (col / 3) * 3;
 
     for (let i: number = 0; i < 3; i++){
         for (let j: number = 0; j < 3; j++){
