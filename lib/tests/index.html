@@ -1,0 +1,61 @@
+<html>
+<body>
+  <table>
+    <tr><td>WASM-Iter:</td><td><span id='wasm-iter'>0</span></td></td>
+    <tr><td>JS-Iter:</td><td><span id='js-iter'>0</span></td></td>
+    <tr><td>WASM-Recur:</td><td><span id='wasm-recur'>0</span></td></td>
+    <tr><td>JS-Recur:</td><td><span id='js-recur'>0</span></td></td>
+
+  </table>
+  <script>
+    'use strict';
+
+    const total = [ 0, 0, 0, 0 ];
+    const solved = [ 0, 0, 0, 0 ];
+
+    const out = [
+        document.getElementById('wasm-iter'),
+        document.getElementById('js-iter'),
+        document.getElementById('wasm-recur'),
+        document.getElementById('js-recur')
+        
+    ];
+
+    function update(index, time) {
+        total[index] += event.data;
+        solved[index]++;
+        out[index].textContent = (((total[index] / solved[index]) * 100) >>> 0) / 100;
+    }
+
+    const wasmIterWorker = new Worker('wasm-worker.js');
+    wasmIterWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`WASM: ${t}`);
+        update(0, t);
+    });
+
+    const jsIterWorker = new Worker('js-worker.js');
+    jsIterWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`JS: ${t}`);
+        update(1, t);
+    });
+
+    // const wasmRecurWorker = new Worker('wasmr-worker.js');
+    // wasmRecurWorker.addEventListener('message', event => {
+    //     const t = event.data;
+    //     console.log(`WASMR: ${t}`);
+    //     update(2, t);
+    // });
+
+    // const jsRecurWorker = new Worker('jsr-worker.js');
+    // jsRecurWorker.addEventListener('message', event => {
+    //     const t = event.data;
+    //     console.log(`JSR: ${t}`);
+    //     update(3, t);
+    // });
+
+    
+  </script>
+</body>
+</html>
