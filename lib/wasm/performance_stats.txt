@@ -45,6 +45,28 @@ Run 1: 0.46
 Run 2: 0.74
 Run 3: 0.57
 
+Iterative: 10,000,000 iterations
+Wasm: 
+Run 1: 16
+Run 2: 20.02
+Run 3: 14.01
+
+Javascript: 
+Run 1: 66.57
+Run 2: 73.36
+Run 3: 68.97
+
+Iterative: 100,000,000 iterations
+wasm: 
+Run 1: 179.04
+Run 2: 162.32
+Run 3: 142.11
+
+Javascript:
+Run 1: 242.42
+Run 2: 226.31
+Run 3: 203.02
+
 
 Recursive: 40th element
 
