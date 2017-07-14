@@ -18,3 +18,43 @@ run the error throwing code
 Javascript: 1-10ms on average
 
 
+Iterative and Recursive Fibonacci
+
+Iterative: 100 iterations
+
+Wasm
+Run 1: 0.03
+Run 2: 0.08
+Run 3: 0.04
+
+Javascript
+Run 1: 0.01
+Run 2: 0.01
+Run 3: 0.01
+
+
+Iterative: 100,000 iterations
+
+Wasm
+Run 1: 0.28
+Run 2: 0.21
+Run 3: 0.21
+
+Javascript
+Run 1: 0.46
+Run 2: 0.74
+Run 3: 0.57
+
+
+Recursive: 40th element
+
+Wasm
+Run 1: 2171.6
+Run 2: 2549.92
+Run 3: 2116.56
+
+Javascript
+Run 1: 1895.76
+Run 2: 1953.06
+Run 3: 1889.23
+
