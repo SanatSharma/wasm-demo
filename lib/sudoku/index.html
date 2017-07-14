@@ -21,12 +21,12 @@
         out[index].textContent = (((total[index] / solved[index]) * 100) >>> 0) / 100;
     }
 
-    const wasmWorker = new Worker('wasm-worker.js');
-    wasmWorker.addEventListener('message', event => {
-        const t = event.data;
-        console.log(`WASM: ${t}`);
-        update(0, t);
-    });
+    // const wasmWorker = new Worker('wasm-worker.js');
+    // wasmWorker.addEventListener('message', event => {
+    //     const t = event.data;
+    //     console.log(`WASM: ${t}`);
+    //     update(0, t);
+    // });
 
     const jsWorker = new Worker('js-worker.js');
     jsWorker.addEventListener('message', event => {

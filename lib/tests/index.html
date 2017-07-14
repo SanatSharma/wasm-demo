@@ -41,19 +41,19 @@
         update(1, t);
     });
 
-    // const wasmRecurWorker = new Worker('wasmr-worker.js');
-    // wasmRecurWorker.addEventListener('message', event => {
-    //     const t = event.data;
-    //     console.log(`WASMR: ${t}`);
-    //     update(2, t);
-    // });
+    const wasmRecurWorker = new Worker('wasmr-worker.js');
+    wasmRecurWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`WASMR: ${t}`);
+        update(2, t);
+    });
 
-    // const jsRecurWorker = new Worker('jsr-worker.js');
-    // jsRecurWorker.addEventListener('message', event => {
-    //     const t = event.data;
-    //     console.log(`JSR: ${t}`);
-    //     update(3, t);
-    // });
+    const jsRecurWorker = new Worker('jsr-worker.js');
+    jsRecurWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`JSR: ${t}`);
+        update(3, t);
+    });
 
     
   </script>
