@@ -3,17 +3,20 @@
   <table>
     <tr><td>WASM-Array:</td><td><span id='wasm-array'>0</span></td></td>
     <tr><td>JS-Array:</td><td><span id='js-array'>0</span></td></td>
-
+    <tr><td>WASM-2DArray:</td><td><span id='wasm-2darray'>0</span></td></td>
+    <tr><td>JS-2DArray:</td><td><span id='js-2darray'>0</span></td></td>
   </table>
   <script>
     'use strict';
 
-    const total = [ 0, 0 ];
-    const solved = [ 0, 0 ];
+    const total = [ 0, 0, 0, 0 ];
+    const solved = [ 0, 0, 0, 0 ];
 
     const out = [
         document.getElementById('wasm-array'),
         document.getElementById('js-array'),
+        document.getElementById('wasm-2darray'),
+        document.getElementById('js-2darray')
         
     ];
 
@@ -35,6 +38,20 @@
         const t = event.data;
         console.log(`JS: ${t}`);
         update(1, t);
+    });
+
+    const wasm2dWorker = new Worker('wasm-2d-worker.js');
+    wasm2dWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`WASM (2D): ${t}`);
+        update(2, t);
+    });
+
+    const js2dWorker = new Worker('js-2d-worker.js');
+    js2dWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`JS (2D): ${t}`);
+        update(3, t);
     });
    
   </script>
