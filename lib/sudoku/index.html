@@ -41,12 +41,12 @@ canvas {
             out[index].textContent = event.data.time;
         }
 
-        const wasmWorker = new Worker('wasm-worker.js');
-        wasmWorker.addEventListener('message', event => {
-            const t = event.data;
-            console.log(`WASM: ${t}`);
-            update(0, t);
-        });
+        // const wasmWorker = new Worker('wasm-worker.js');
+        // wasmWorker.addEventListener('message', event => {
+        //     const t = event.data;
+        //     console.log(`WASM: ${t}`);
+        //     update(0, t);
+        // });
 
         const jsWorker = new Worker('js-worker.js');
         jsWorker.addEventListener('message', event => {
