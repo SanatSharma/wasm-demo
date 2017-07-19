@@ -1,21 +1,11 @@
-
+//type int = number;
 
 var modelLength: int = 9;
 var model: int[][] = new Array(9);
 var preSetNumbers: int[][] = new Array(9);
 
-function initBoard(): void {
-    let i: int = 0;
-    let j: int = 0;
-    for (i = 0; i < modelLength; i++) {
-        model[i] = new Array(9);
-        for (j = 0; j < modelLength; j++) {
-            model[i][j] = 0;
-        }
-    }  
-
-    //console.log("init arr " + model);
-     model[0][0] = 9 ;
+function setBoard(): void {
+    model[0][0] = 9 ;
     model[0][3] = 2 ;
     model[0][6] = 7 ;
     model[0][7] = 5 ;
@@ -53,6 +43,31 @@ function initBoard(): void {
     model[8][1] = 8 ;
     model[8][2] = 2 ;
     model[8][4] = 4 ;
+}
+
+function cleanup(): void {
+    for (let i: int = 0; i < modelLength; i++) {
+        for (let j: int = 0; j < modelLength; j++) {
+            model[i][j] = 0;
+        }
+    }
+    setBoard(); 
+}
+
+function initBoard(): void {
+    let i: int = 0;
+    let j: int = 0;
+    
+    for (i = 0; i < modelLength; i++) {
+        model[i] = new Array(9);
+        for (j = 0; j < modelLength; j++) {
+            model[i][j] = 0;
+        }
+    }  
+
+    setBoard();
+    //console.log("init arr " + model);
+
  //   model[8][8] = 6 ;
 
     // Create the initial board
@@ -99,9 +114,8 @@ function initBoard(): void {
     }
 }
 
-function main(): void {
+function main(): int {
     //console.log(model);
-    initBoard();
     //solve(0,0);
     let bool: int = 0;
     let firstTime: int = 0;
@@ -187,7 +201,15 @@ function main(): void {
     // for(let h = 0; h < 9; h++) {
     //     console.log(model[h]);
     // }
-    //console.log(model);
+    // console.log(model);
+    
+    cleanup();
+
+    // for(let h = 0; h < 9; h++) {
+    //     console.log(model[h]);
+    // }
+    // console.log(model);
+    // return model[8][3];
 
 }
 
