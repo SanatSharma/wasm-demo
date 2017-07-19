@@ -28,12 +28,12 @@
         update(0, t);
     });
 
-    // const jsWorker = new Worker('js-worker.js');
-    // jsWorker.addEventListener('message', event => {
-    //     const t = event.data;
-    //     console.log(`JS: ${t}`);
-    //     update(1, t);
-    // });
+    const jsWorker = new Worker('js-worker.js');
+    jsWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`JS: ${t}`);
+        update(1, t);
+    });
     
   </script>
 </body>
