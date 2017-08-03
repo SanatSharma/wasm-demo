@@ -60,3 +60,37 @@ Run 1: 1895.76
 Run 2: 1953.06
 Run 3: 1889.23
 
+
+Recursive: 35th element
+Wasm
+Run 1: 84.76
+Run 2: 84.47
+Run 3: 82.29
+
+Javascript
+Run 1: 111.07
+Run 2: 109.46
+Run 3: 109.79
+
+Recursive: 30th element
+Wasm
+Run 1: 19.08
+Run 2: 12.92
+Run 3: 18.87
+
+Javascript
+Run 1: 10.16
+Run 2: 11.94
+Run 3: 16.15
+
+
+Recursive: 38th element
+Wasm
+Run 1: 492.82
+Run 2: 437.82
+Run 3: 484.66
+
+Javascript
+Run 1: 406.94
+Run 2: 348.02
+Run 3: 381.7
