@@ -1,10 +1,9 @@
 <html>
 <body>
   <table>
-    <tr><td>WASM-Array:</td><td><span id='wasm-array'>0</span></td></td>
-    <tr><td>JS-Array:</td><td><span id='js-array'>0</span></td></td>
-    <tr><td>WASM-2DArray:</td><td><span id='wasm-2darray'>0</span></td></td>
-    <tr><td>JS-2DArray:</td><td><span id='js-2darray'>0</span></td></td>
+    <tr><td>Javascript:</td><td><span id='js'>0</span></td></td>
+    <tr><td>AssemblyScript-wasm:</td><td><span id='assemblyscript'>0</span></td></td>
+    <tr><td>C-wasm:</td><td><span id='c'>0</span></td></td>
   </table>
   <script>
     'use strict';
@@ -13,11 +12,9 @@
     const solved = [ 0, 0, 0, 0 ];
 
     const out = [
-        document.getElementById('wasm-array'),
-        document.getElementById('js-array'),
-        document.getElementById('wasm-2darray'),
-        document.getElementById('js-2darray')
-        
+        document.getElementById('js'),
+        document.getElementById('assemblyscript'),
+        document.getElementById('c'),        
     ];
 
     function update(index, time) {
@@ -26,32 +23,26 @@
         out[index].textContent = (((total[index] / solved[index]) * 100) >>> 0) / 100;
     }
 
-    const wasmWorker = new Worker('wasm-array-worker.js');
-    wasmWorker.addEventListener('message', event => {
-        const t = event.data;
-        console.log(`WASM: ${t}`);
-        update(0, t);
-    });
-
     const jsWorker = new Worker('js-array-worker.js');
     jsWorker.addEventListener('message', event => {
         const t = event.data;
         console.log(`JS: ${t}`);
+        update(0, t);
+    });
+
+    const wasmWorker = new Worker('assemblyscript-worker.js');
+    wasmWorker.addEventListener('message', event => {
+        const t = event.data;
+        console.log(`AssemblyScript: ${t}`);
         update(1, t);
     });
 
-    const wasm2dWorker = new Worker('wasm-2d-worker.js');
+
+    const wasm2dWorker = new Worker('c-worker.js');
     wasm2dWorker.addEventListener('message', event => {
         const t = event.data;
-        console.log(`WASM (2D): ${t}`);
+        console.log(`C : ${t}`);
         update(2, t);
-    });
-
-    const js2dWorker = new Worker('js-2d-worker.js');
-    js2dWorker.addEventListener('message', event => {
-        const t = event.data;
-        console.log(`JS (2D): ${t}`);
-        update(3, t);
     });
    
   </script>
